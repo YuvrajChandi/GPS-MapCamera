@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPS Map Camera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="min-h-screen bg-gray-950 text-white">
+    <header class="border-b border-white/10 bg-gray-950/95 px-5 py-4">
+      <h1 class="text-xl font-bold tracking-tight">GPS Map Camera</h1>
+    </header>
+
+    <main class="grid min-h-[calc(100vh-65px)] grid-cols-1 lg:grid-cols-[360px_1fr]">
+      <aside class="border-b border-white/10 bg-gray-900 p-5 lg:border-b-0 lg:border-r">
+        <div class="space-y-7">
+          <section class="space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wide text-gray-300">Location Info</h2>
+            <label class="field-label">
+              <span>Title</span>
+              <input id="titleInput" class="field-input" type="text" />
+            </label>
+            <label class="field-label">
+              <span>Subtitle</span>
+              <textarea id="subtitleInput" class="field-input min-h-20 resize-y"></textarea>
+            </label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="field-label">
+                <span>Latitude</span>
+                <input id="latInput" class="field-input" type="number" step="any" />
+              </label>
+              <label class="field-label">
+                <span>Longitude</span>
+                <input id="lonInput" class="field-input" type="number" step="any" />
+              </label>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="field-label">
+                <span>Date</span>
+                <input id="dateInput" class="field-input" type="date" />
+              </label>
+              <label class="field-label">
+                <span>Time</span>
+                <input id="timeInput" class="field-input" type="time" />
+              </label>
+            </div>
+            <label class="field-label">
+              <span>Timezone</span>
+              <select id="timezoneInput" class="field-input">
+                <option value="+05:30">GMT +05:30</option>
+                <option value="+00:00">GMT +00:00</option>
+                <option value="-08:00">GMT -08:00</option>
+                <option value="-05:00">GMT -05:00</option>
+                <option value="+01:00">GMT +01:00</option>
+                <option value="+04:00">GMT +04:00</option>
+                <option value="+08:00">GMT +08:00</option>
+              </select>
+            </label>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wide text-gray-300">Map Image</h2>
+            <label class="file-button">
+              <input id="mapInput" type="file" accept="image/*" class="sr-only" />
+              Upload Map Image
+            </label>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wide text-gray-300">Appearance</h2>
+            <label class="field-label">
+              <span class="flex items-center justify-between">
+                <span>Overlay Scale</span>
+                <strong id="scaleValue" class="text-white">100%</strong>
+              </span>
+              <input id="scaleInput" type="range" min="50" max="150" value="100" class="accent-sky-400" />
+            </label>
+          </section>
+        </div>
+      </aside>
+
+      <section class="flex min-w-0 flex-col gap-4 bg-gray-950 p-4 sm:p-6">
+        <div id="dropZone" class="drop-zone">
+          <input id="photoInput" type="file" accept="image/*" class="sr-only" />
+          <div class="text-center">
+            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-sky-500/15 text-2xl text-sky-200">+</div>
+            <p class="text-lg font-semibold">Drop a photo here</p>
+            <p class="mt-1 text-sm text-gray-400">or click to upload any image</p>
+          </div>
+        </div>
+
+        <div id="workspace" class="hidden min-h-0 flex-1 flex-col gap-4">
+          <div class="preview-shell">
+            <div id="previewSizer">
+              <div id="captureArea" class="overlay-wrapper">
+                <img id="photoImage" alt="Uploaded photo" />
+                <div class="overlay-content">
+                  <div id="overlayBox" class="overlay-box">
+                    <div class="label-topright">
+                      <img id="logoImage" alt="Logo" />
+                      <span id="appLabelText">GPS Map Camera</span>
+                    </div>
+
+                    <div class="map-image">
+                      <img id="mapImage" alt="Map" />
+                      <div class="map-pin" aria-hidden="true"></div>
+                    </div>
+
+                    <div class="text-content">
+                      <div id="titleText" class="title">Noida, Uttar Pradesh, India</div>
+                      <div id="subtitleText" class="subtitle">E SQUARE, C2 Sector 96, Noida Uttar Pradesh 201301, India</div>
+                      <div id="coordsTimeText" class="coords-time">
+                        Lat 28.541264° Long 77.34641°<br />
+                        04/06/2025 01:02PM GMT +05:30
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button id="downloadButton" class="hidden self-start rounded-md bg-sky-500 px-5 py-3 font-bold text-white shadow-lg shadow-sky-950/30 transition hover:bg-sky-400">
+            Download Image
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

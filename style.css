@@ -1,0 +1,234 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.field-label {
+  display: grid;
+  gap: 0.45rem;
+  color: rgb(209 213 219);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.field-input {
+  width: 100%;
+  border: 1px solid rgb(55 65 81);
+  border-radius: 0.5rem;
+  background: rgb(17 24 39);
+  color: white;
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: rgb(56 189 248);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.14);
+}
+
+.file-button {
+  display: inline-flex;
+  width: 100%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(75 85 99);
+  background: rgb(31 41 55);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: white;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.file-button:hover {
+  border-color: rgb(125 211 252);
+  background: rgb(55 65 81);
+}
+
+.drop-zone {
+  display: flex;
+  min-height: 420px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed rgb(75 85 99);
+  border-radius: 0.75rem;
+  background: rgb(17 24 39);
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.drop-zone.is-dragging {
+  border-color: rgb(56 189 248);
+  background: rgba(14, 165, 233, 0.1);
+}
+
+.preview-shell {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.045) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.045) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.045) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.045) 75%);
+  background-color: rgb(3 7 18);
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  background-size: 20px 20px;
+  padding: 1rem;
+}
+
+#previewSizer {
+  margin: 0 auto;
+}
+
+.overlay-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.overlay-wrapper > img {
+  display: block;
+  max-width: 100%;
+}
+
+.overlay-content {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+}
+
+.overlay-box {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: white;
+  background: transparent;
+  border-radius: 0.5rem;
+  width: 750px;
+}
+
+.label-topright {
+  position: absolute;
+  bottom: calc(100% - 0.245px);
+  right: 0;
+  background-color: #000000c4;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.25rem 0.6rem 0.25rem 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.label-topright img {
+  width: 22px;
+  height: 22px;
+  border-radius: 0.2rem;
+}
+
+.label-topright span {
+  font-weight: 700;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.map-image {
+  flex-shrink: 0;
+  width: 147.509px;
+  height: 147.509px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #444;
+  position: relative;
+}
+
+.map-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.map-image.auto-map-thumb img {
+  filter: saturate(0.85) contrast(1.18) brightness(0.78);
+  transform: scale(1.04);
+}
+
+.text-content {
+  background-color: #000000c4;
+  border-radius: 0.5rem 0 0.5rem 0.5rem;
+  flex-grow: 1;
+  line-height: 1.4;
+  padding: 16px;
+  height: 147.509px;
+  width: 800px;
+}
+
+.title {
+  font-size: 1.675rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.coords-time {
+  font-weight: 400;
+  font-size: 1rem;
+  margin-top: 0.35rem;
+}
+
+.overlay-content,
+.overlay-box {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.map-pin {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
+  background: #ef4444;
+  box-shadow: -2px 5px 10px rgba(0, 0, 0, 0.45);
+  transform: translate(-50%, -88%) rotate(-45deg);
+}
+
+.map-pin::before {
+  content: "";
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 24px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.28);
+  filter: blur(1px);
+  transform: rotate(45deg) translate(11px, 22px);
+}
+
+.map-pin::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #1f1111;
+}
