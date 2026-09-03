@@ -1,3 +1,5 @@
+import logo from './assets/logo.jpg';
+
 const defaults = {
   title: 'Noida, Uttar Pradesh, India',
   subtitle: 'E SQUARE, C2 Sector 96, Noida Uttar Pradesh 201301, India',
@@ -25,8 +27,6 @@ const placeholderMap =
       <path d="M48 211 211 45" stroke="#f8fafc" stroke-opacity=".22" stroke-width="18"/>
     </svg>
   `);
-
-const logo = './assets/logo.jpg';
 
 const state = {
   photoUrl: '',
