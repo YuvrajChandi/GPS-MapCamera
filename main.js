@@ -8,6 +8,7 @@ const defaults = {
   date: '2025-06-04',
   time: '13:02',
   timezone: '+05:30',
+  mapType: 'street',
   scale: 100,
 };
 
@@ -57,6 +58,7 @@ const els = {
   dateInput: document.querySelector('#dateInput'),
   timeInput: document.querySelector('#timeInput'),
   timezoneInput: document.querySelector('#timezoneInput'),
+  mapTypeInput: document.querySelector('#mapTypeInput'),
   scaleInput: document.querySelector('#scaleInput'),
   scaleValue: document.querySelector('#scaleValue'),
   mapInput: document.querySelector('#mapInput'),
@@ -79,6 +81,11 @@ function init() {
   bindInput('dateInput', 'date');
   bindInput('timeInput', 'time');
   bindInput('timezoneInput', 'timezone');
+
+  els.mapTypeInput.addEventListener('change', () => {
+    state.mapType = els.mapTypeInput.value;
+    autoFetchMap();
+  });
 
   Object.entries(defaults).forEach(([key, value]) => {
     const input = els[`${key}Input`];
@@ -217,7 +224,9 @@ function autoFetchMap() {
   const y = Math.floor(
     ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * Math.pow(2, z)
   );
-  const url = `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
+  const url = state.mapType === 'satellite'
+    ? `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`
+    : `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
 
   const tile = new Image();
   tile.crossOrigin = 'anonymous';

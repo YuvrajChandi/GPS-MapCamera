@@ -66,10 +66,18 @@
 
           <section class="space-y-4">
             <h2 class="text-sm font-bold uppercase tracking-wide text-gray-300">Map Image</h2>
+            <label class="field-label">
+              <span>Map Type</span>
+              <select id="mapTypeInput" class="field-input">
+                <option value="street">Street Map</option>
+                <option value="satellite">Satellite</option>
+              </select>
+            </label>
             <label class="file-button">
               <input id="mapInput" type="file" accept="image/*" class="sr-only" />
               Upload Map Image
             </label>
+            <p class="text-xs leading-relaxed text-gray-500">Street map data © OpenStreetMap contributors. Satellite imagery © Esri.</p>
           </section>
 
           <section class="space-y-4">
