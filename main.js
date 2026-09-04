@@ -236,7 +236,7 @@ function formatDateTime() {
   const [year, month, day] = state.date.split('-');
   const [hourText, minute = '00'] = state.time.split(':');
   const hour = Number(hourText);
-  const safeDate = year && month && day ? `${month}/${day}/${year}` : '04/06/2025';
+  const safeDate = year && month && day ? `${day}/${month}/${year}` : '04/06/2025';
   const safeHour = Number.isFinite(hour) ? hour : 13;
   const hour12 = safeHour % 12 || 12;
   const period = safeHour >= 12 ? 'PM' : 'AM';
